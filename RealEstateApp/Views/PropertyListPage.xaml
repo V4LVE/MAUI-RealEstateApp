@@ -10,10 +10,10 @@
     x:DataType="vm:PropertyListPageViewModel">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" />
+        <ToolbarItem Text="Add" Command="{Binding GoToAddPropertyCommand}" />
     </ContentPage.ToolbarItems>
 
-    <RefreshView>
+    <RefreshView Command="{Binding GetPropertiesCommand}" IsRefreshing="{Binding IsRefreshing}">
 
         <CollectionView
             BackgroundColor="LightGray"
@@ -48,45 +48,54 @@
                                         Grid.Row="0"
                                         FontAttributes="Bold"
                                         FontSize="14"
+                                        TextColor="Black"
                                         LineBreakMode="TailTruncation"
                                         Text="{Binding Property.Address}" />
                                     <Label
                                         Grid.Row="1"
                                         FontSize="13"
+                                        TextColor="Black"
                                         LineBreakMode="NoWrap"
                                         Text="{Binding Property.Price, StringFormat='{0:C0}'}" />
                                     <Grid Grid.Row="2" ColumnDefinitions="*, *, *, *, *, *">
                                         <Label
                                             Grid.Column="0"
                                             FontFamily="FA-solid"
+                                            TextColor="Black"
                                             FontSize="15"
                                             Text="{x:Static fa:IconFont.Bed}" />
                                         <Label
                                             Grid.Column="1"
                                             FontSize="13"
+                                            TextColor="Black"
                                             Text="{Binding Property.Beds}" />
                                         <Label
                                             Grid.Column="2"
                                             FontFamily="FA-solid"
+                                            TextColor="Black"
                                             FontSize="15"
                                             Text="{x:Static fa:IconFont.Bath}" />
                                         <Label
                                             Grid.Column="3"
                                             FontSize="13"
+                                            TextColor="Black"
                                             Text="{Binding Property.Baths}" />
                                         <Label
                                             Grid.Column="4"
                                             FontFamily="FA-solid"
+                                            TextColor="Black"
                                             FontSize="15"
                                             Text="{x:Static fa:IconFont.Parking}" />
                                         <Label
                                             Grid.Column="5"
+                                            TextColor="Black"
                                             FontSize="13"
                                             Text="{Binding Property.Parking}" />
                                     </Grid>
                                     <Label
                                         Grid.Row="3"
                                         FontSize="13"
+                                        TextColor="Black"
                                         Text="{Binding Property.LandSize, StringFormat='Land Size: {0} &#x33a1;'}" />
                                 </Grid>
                             </Grid>

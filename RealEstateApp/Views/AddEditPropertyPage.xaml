@@ -24,7 +24,7 @@
             <ScrollView VerticalOptions="FillAndExpand">
                 <StackLayout Padding="15" Spacing="20">
 
-                    <Label FontSize="Medium">
+                    <Label FontSize="Medium" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid" Text="{x:Static fa:IconFont.Home}" />
@@ -33,9 +33,9 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Entry FontSize="Medium" Text="{Binding Property.Address}" />
+                    <Entry FontSize="Medium" TextColor="Black" Text="{Binding Property.Address}" />
 
-                    <Label FontFamily="FA-solid" FontSize="Medium">
+                    <Label FontFamily="FA-solid" TextColor="Black" FontSize="Medium">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid" Text="{Static fa:IconFont.Tag}" />
@@ -44,9 +44,9 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Entry FontSize="Medium" Text="{Binding Property.Price, Converter={converters:NullableIntConverter}}" />
+                    <Entry FontSize="Medium" TextColor="Black" Text="{Binding Property.Price, Converter={converters:NullableIntConverter}}" />
 
-                    <Label FontSize="Medium">
+                    <Label FontSize="Medium" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid" Text="{Static fa:IconFont.Bed}" />
@@ -59,9 +59,10 @@
                         FontSize="Medium"
                         Keyboard="Numeric"
                         ReturnType="Next"
+                        TextColor="Black"
                         Text="{Binding Property.Beds, Converter={converters:NullableIntConverter}}" />
 
-                    <Label FontSize="Medium">
+                    <Label FontSize="Medium" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid" Text="{Static fa:IconFont.Bath}" />
@@ -74,9 +75,10 @@
                         FontSize="Medium"
                         Keyboard="Numeric"
                         ReturnType="Next"
+                        TextColor="Black"
                         Text="{Binding Property.Baths, Converter={converters:NullableIntConverter}}" />
 
-                    <Label FontSize="Medium">
+                    <Label FontSize="Medium" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid" Text="{Static fa:IconFont.Parking}" />
@@ -89,9 +91,10 @@
                         FontSize="Medium"
                         Keyboard="Numeric"
                         ReturnType="Next"
+                        TextColor="Black"
                         Text="{Binding Property.Parking, Converter={converters:NullableIntConverter}}" />
 
-                    <Label FontSize="Medium">
+                    <Label FontSize="Medium" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid" Text="{Static fa:IconFont.Square}" />
@@ -106,9 +109,10 @@
                         FontSize="Medium"
                         Keyboard="Numeric"
                         ReturnType="Next"
+                        TextColor="Black"
                         Text="{Binding Property.LandSize, Converter={converters:NullableIntConverter}}" />
 
-                    <Label FontSize="Medium">
+                    <Label FontSize="Medium" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid" Text="{Static fa:IconFont.FileAlt}" />
@@ -121,12 +125,13 @@
                         Margin="0"
                         AutoSize="TextChanges"
                         FontSize="Medium"
+                        TextColor="Black"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Keyboard="Text"
                         Text="{Binding Property.Description}" />
 
-                    <Label FontSize="Medium">
+                    <Label FontSize="Medium" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span FontFamily="FA-solid" Text="{Static fa:IconFont.UserTie}" />
@@ -137,6 +142,7 @@
                     </Label>
                     <Picker
                         FontSize="Medium"
+                        TextColor="Black"
                         ItemDisplayBinding="{Binding Name}"
                         ItemsSource="{Binding Agents}"
                         SelectedItem="{Binding SelectedAgent}" />

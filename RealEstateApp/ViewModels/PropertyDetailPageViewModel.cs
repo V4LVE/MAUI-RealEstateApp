@@ -28,16 +28,19 @@ public class PropertyDetailPageViewModel : BaseViewModel
         set
         {
             SetProperty(ref propertyListItem, value);
-           
+
             Property = propertyListItem.Property;
             Agent = service.GetAgents().FirstOrDefault(x => x.Id == Property.AgentId);
         }
     }
 
     private Command editPropertyCommand;
-    public ICommand EditPropertyCommand => editPropertyCommand ??= new Command(async () => await GotoEditProperty());
-    async Task GotoEditProperty()
+    public ICommand EditPropertyCommand => editPropertyCommand ??= new Command<Property>(async (property) => await GotoEditProperty(property));
+    async Task GotoEditProperty(Property property)
     {
-        
+        await Shell.Current.GoToAsync($"{nameof(AddEditPropertyPage)}?mode=editproperty", true, new Dictionary<string, object>
+        {
+            {"MyProperty", property }
+        });
     }
 }

@@ -44,9 +44,11 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         get => _selectedAgent;
         set
         {
+
+
             if (Property != null)
             {
-                _selectedAgent = value;
+                SetProperty(ref _selectedAgent, value);
                 Property.AgentId = _selectedAgent?.Id;
             }
         }
@@ -74,7 +76,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     {
         if (IsValid() == false)
         {
-           StatusMessage = "Please fill in all required fields";
+            StatusMessage = "Please fill in all required fields";
             StatusColor = Colors.Red;
         }
         else
