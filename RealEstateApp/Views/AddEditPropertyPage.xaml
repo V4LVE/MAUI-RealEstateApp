@@ -35,6 +35,30 @@
                     </Label>
                     <Entry FontSize="Medium" TextColor="Black" Text="{Binding Property.Address}" />
 
+                    <Label FontSize="Medium" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontFamily="FA-solid" Text="{x:Static fa:IconFont.LocationArrow}" />
+                                <Span Text=" " />
+                                <Span Text="Location*" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Grid ColumnDefinitions="*,*,*" RowDefinitions="*">
+                        <Label Text="{Binding Property.Latitude}" VerticalOptions="Center" TextColor="Black"></Label>
+                        <Label Text="{Binding Property.Longitude}" VerticalOptions="Center" TextColor="Black" Grid.Column="1"></Label>
+                        <Button
+                            Text="{x:Static fa:IconFont.Thumbtack}"
+                            FontSize="Medium"
+                            FontFamily="FA-solid"
+                            VerticalOptions="Center"
+                            TextColor="White"
+                            BackgroundColor="MediumPurple"
+                            Grid.Column="2"
+                            Command="{Binding GetLocationCommand}" />
+                    </Grid>
+
                     <Label FontFamily="FA-solid" TextColor="Black" FontSize="Medium">
                         <Label.FormattedText>
                             <FormattedString>

@@ -98,4 +98,55 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
     private Command cancelSaveCommand;
     public ICommand CancelSaveCommand => cancelSaveCommand ??= new Command(async () => await Shell.Current.GoToAsync(".."));
+
+
+    private Command getLocationCommand;
+    public ICommand GetLocationCommand => getLocationCommand ??= new Command(async () => await GetCurrentLocation());
+
+    private bool _isCheckingLocation;
+    public bool IsCheckingLocation
+    {
+        get { return _isCheckingLocation; }
+        set { SetProperty(ref _isCheckingLocation, value); }
+    }
+
+    private async Task GetCurrentLocation()
+    {
+        try
+        {
+            _isCheckingLocation = true;
+
+            GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+
+            Location location = await Geolocation.Default.GetLocationAsync(request);
+
+            if (location != null)
+            {
+                Property.Latitude = location.Latitude;
+                Property.Longitude = location.Longitude;
+                OnPropertyChanged(nameof(Property));
+            }
+
+        }
+        catch (FeatureNotSupportedException fnsEx)
+        {
+            // Handle not supported on device exception
+        }
+        catch (FeatureNotEnabledException fneEx)
+        {
+            // Handle not enabled on device exception
+        }
+        catch (PermissionException pEx)
+        {
+            // Handle permission exception
+        }
+        catch (Exception ex)
+        {
+            // Unable to get location
+        }
+        finally
+        {
+            _isCheckingLocation = false;
+        }
+    }
 }
