@@ -85,7 +85,7 @@ public class PropertyListPageViewModel : BaseViewModel
     {
         if (propertyListItem == null)
             return;
-
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
         await Shell.Current.GoToAsync(nameof(PropertyDetailPage), true, new Dictionary<string, object>
         {
             {"MyPropertyListItem", propertyListItem }
@@ -96,6 +96,7 @@ public class PropertyListPageViewModel : BaseViewModel
     public ICommand GoToAddPropertyCommand => goToAddPropertyCommand ??= new Command(async () => await GotoAddProperty());
     async Task GotoAddProperty()
     {
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
         await Shell.Current.GoToAsync($"{nameof(AddEditPropertyPage)}?mode=newproperty", true, new Dictionary<string, object>
         {
             {"MyProperty", new Property() }

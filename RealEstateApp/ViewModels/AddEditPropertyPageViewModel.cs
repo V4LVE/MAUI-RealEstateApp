@@ -102,6 +102,7 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         else
         {
             service.SaveProperty(Property);
+            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(100));
             await Shell.Current.GoToAsync("///propertylist");
         }
     }
