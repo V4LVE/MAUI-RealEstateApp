@@ -19,7 +19,8 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         NetworkAccess accessType = Connectivity.Current.NetworkAccess;
 
         Connectivity.ConnectivityChanged += OnConnectivityChanged;
-
+        Battery.Default.BatteryInfoChanged += Battery_BatteryInfoChanged;
+        Battery.Default.EnergySaverStatusChanged += Battery_EnergySaverStatusChanged;
 
         if (accessType != NetworkAccess.Internet)
         {
@@ -244,6 +245,63 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         {
             await Shell.Current.DisplayAlert("No Internet", "You are not connected to the internet. Please check your connection and try again.", "OK");
             InternetAvailable = false;
+        }
+    }
+
+    private void Battery_BatteryInfoChanged(object sender, BatteryInfoChangedEventArgs e)
+    {
+        if (e.ChargeLevel < 0.2)
+        {
+            StatusMessage = "Battery low, please connect to a power source.";
+            StatusColor = Colors.Red;
+        }
+        else if (e.State == BatteryState.Charging)
+        {
+            StatusMessage = "Battery is charging.";
+            StatusColor = Colors.Yellow;
+        }
+    }
+
+    private void Battery_EnergySaverStatusChanged(object sender, EnergySaverStatusChangedEventArgs e)
+    {
+        if (e.EnergySaverStatus == EnergySaverStatus.On)
+        {
+            StatusMessage = "Energy saver is on, some features may be limited.";
+            StatusColor = Colors.Green;
+        }
+    }
+
+    private Command toggleLightsCommand;
+    public ICommand ToggleLightsCommand => toggleLightsCommand ??= new Command(async () => await ToggleLights());
+
+    private bool _areLightsOn = false;
+
+    private async Task ToggleLights()
+    {
+        try
+        {
+            if (_areLightsOn)
+            {
+                await Flashlight.Default.TurnOffAsync();
+                _areLightsOn = false;
+            }
+            else
+            {
+                await Flashlight.Default.TurnOnAsync();
+                _areLightsOn = true;
+            }
+        }
+        catch (FeatureNotSupportedException fnsEx)
+        {
+            // Feature not supported on device
+        }
+        catch (PermissionException pEx)
+        {
+            // Permissions not granted
+        }
+        catch (Exception ex)
+        {
+            // Other error has occurred.
         }
     }
 }

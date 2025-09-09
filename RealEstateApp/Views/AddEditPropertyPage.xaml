@@ -11,6 +11,7 @@
     x:DataType="vm:AddEditPropertyPageViewModel">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding ToggleLightsCommand}" Text="Toggle Light" />
         <ToolbarItem Command="{Binding CancelSaveCommand}" Text="Cancel" />
         <ToolbarItem Command="{Binding SavePropertyCommand}" Text="Save" />
     </ContentPage.ToolbarItems>
