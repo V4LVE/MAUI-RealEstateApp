@@ -8,7 +8,7 @@ using System.Windows.Input;
 namespace RealEstateApp.ViewModels;
 public class PropertyListPageViewModel : BaseViewModel
 {
-    public ObservableCollection<PropertyListItem> PropertiesCollection { get; } = new();
+    public ObservableCollection<PropertyListItem> PropertiesCollection { get; set; } = new();
 
     private readonly IPropertyService service;
 
@@ -24,6 +24,8 @@ public class PropertyListPageViewModel : BaseViewModel
         get => isRefreshing;
         set => SetProperty(ref isRefreshing, value);
     }
+
+    Location _lastKnownLocation;
 
     private Command getPropertiesCommand;
     public ICommand GetPropertiesCommand => getPropertiesCommand ??= new Command(async () => await GetPropertiesAsync());
@@ -41,9 +43,28 @@ public class PropertyListPageViewModel : BaseViewModel
             if (PropertiesCollection.Count != 0)
                 PropertiesCollection.Clear();
 
-            foreach (Property property in properties)
-                PropertiesCollection.Add(new PropertyListItem(property));
+            List<PropertyListItem> propertiesListSorted = new();
 
+            foreach (Property property in properties)
+            {
+                double distance = 0.0;
+
+                if (_lastKnownLocation != null)
+                {
+                    Location addressLocation = new(property.Latitude ?? 0, property.Longitude ?? 0);
+
+                    distance = Location.CalculateDistance(addressLocation, _lastKnownLocation, DistanceUnits.Kilometers);
+                }
+
+                propertiesListSorted.Add(new PropertyListItem(property, distance));
+            }
+
+            propertiesListSorted = propertiesListSorted.OrderBy(p => p.Distance).ToList();
+
+            foreach (var propertyListItem in propertiesListSorted)
+            {
+                PropertiesCollection.Add(propertyListItem);
+            }
         }
         catch (Exception ex)
         {
@@ -80,4 +101,32 @@ public class PropertyListPageViewModel : BaseViewModel
             {"MyProperty", new Property() }
         });
     }
+
+    #region Dsitance sorting
+    private Command sortByDistanceCommand;
+    public ICommand SortByDistanceCommand => sortByDistanceCommand ??= new Command(async () => await SortByDistance());
+
+    async Task SortByDistance()
+    {
+        try
+        {
+            if (_lastKnownLocation == null)
+            {
+                _lastKnownLocation = await Geolocation.Default.GetLocationAsync();
+            }
+
+            await GetPropertiesAsync();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Unable to sort by distance: {ex.Message}");
+            await Shell.Current.DisplayAlert("Error!", ex.Message, "OK");
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+    #endregion
+
 }

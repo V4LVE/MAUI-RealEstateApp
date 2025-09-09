@@ -11,6 +11,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding GoToAddPropertyCommand}" />
+        <ToolbarItem IconImageSource="fa_sort_amount_asc.png" Command="{Binding SortByDistanceCommand}"/>
     </ContentPage.ToolbarItems>
 
     <RefreshView Command="{Binding GetPropertiesCommand}" IsRefreshing="{Binding IsRefreshing}">
@@ -42,7 +43,7 @@
                                 <Grid
                                     Grid.Column="1"
                                     Margin="0,10,10,0"
-                                    RowDefinitions="Auto, Auto, Auto, Auto"
+                                    RowDefinitions="Auto, Auto, Auto, Auto, Auto"
                                     RowSpacing="10">
                                     <Label
                                         Grid.Row="0"
@@ -97,6 +98,11 @@
                                         FontSize="13"
                                         TextColor="Black"
                                         Text="{Binding Property.LandSize, StringFormat='Land Size: {0} &#x33a1;'}" />
+                                    <Label
+                                        Grid.Row="4"
+                                        FontSize="13"
+                                        TextColor="Black"
+                                        Text="{Binding Distance, StringFormat='{0:n2}km away'}" />
                                 </Grid>
                             </Grid>
                         </Frame>

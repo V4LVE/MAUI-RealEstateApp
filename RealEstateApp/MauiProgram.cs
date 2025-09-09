@@ -34,6 +34,11 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
+        builder.ConfigureEssentials(essentials =>
+         {
+             essentials.UseMapServiceToken("YOUR-API-TOKEN");
+         });
+
         return builder.Build();
     }
 }
