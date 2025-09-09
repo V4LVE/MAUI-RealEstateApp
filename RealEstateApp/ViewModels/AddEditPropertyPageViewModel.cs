@@ -15,6 +15,17 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     {
         this.service = service;
         Agents = new ObservableCollection<Agent>(service.GetAgents());
+
+        NetworkAccess accessType = Connectivity.Current.NetworkAccess;
+
+        Connectivity.ConnectivityChanged += OnConnectivityChanged;
+
+
+        if (accessType != NetworkAccess.Internet)
+        {
+            Shell.Current.DisplayAlert("No Internet", "You are not connected to the internet. Please check your connection and try again.", "OK");
+            InternetAvailable = false;
+        }
     }
 
     public string Mode { get; set; }
@@ -66,6 +77,14 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     {
         get { return statusColor; }
         set { SetProperty(ref statusColor, value); }
+    }
+
+    private bool _internetAvailable = true;
+
+    public bool InternetAvailable
+    {
+        get { return _internetAvailable; }
+        set { SetProperty(ref _internetAvailable, value); }
     }
     #endregion
 
@@ -203,6 +222,21 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         {
             _isCheckingLocation = false;
             StatusMessage = string.Empty;
+        }
+    }
+
+    private async void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+    {
+        if (e.NetworkAccess == NetworkAccess.Internet)
+        {
+            await Shell.Current.DisplayAlert("Internet Restored", "You are now connected to the internet.", "OK");
+            InternetAvailable = true;
+        }
+
+        if (e.NetworkAccess != NetworkAccess.Internet)
+        {
+            await Shell.Current.DisplayAlert("No Internet", "You are not connected to the internet. Please check your connection and try again.", "OK");
+            InternetAvailable = false;
         }
     }
 }
