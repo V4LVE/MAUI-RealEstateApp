@@ -122,6 +122,12 @@ public class AddEditPropertyPageViewModel : BaseViewModel
 
             if (location != null)
             {
+                IEnumerable<Placemark> placemarks = await Geocoding.Default.GetPlacemarksAsync(location.Latitude, location.Longitude);
+
+                Placemark placemark = placemarks?.FirstOrDefault();
+
+                Property.Address = $"{placemark.Thoroughfare} {placemark.SubThoroughfare}, {placemark.Locality} {placemark.PostalCode} {placemark.CountryName}";
+
                 Property.Latitude = location.Latitude;
                 Property.Longitude = location.Longitude;
                 OnPropertyChanged(nameof(Property));
@@ -147,6 +153,56 @@ public class AddEditPropertyPageViewModel : BaseViewModel
         finally
         {
             _isCheckingLocation = false;
+        }
+    }
+
+    private Command getAddressLocationCommand;
+    public ICommand GetAddressLocationCommand => getAddressLocationCommand ??= new Command(async () => await GetAddressLocation());
+    private async Task GetAddressLocation()
+    {
+        if (_isCheckingLocation)
+        {
+            await Shell.Current.DisplayAlert("Please wait", "Already checking address please wait", "OK");
+            return;
+        }
+
+        try
+        {
+            _isCheckingLocation = true;
+            StatusMessage = "Checking address...";
+            StatusColor = Colors.Yellow;
+
+            if (String.IsNullOrWhiteSpace(Property.Address))
+            {
+                await Shell.Current.DisplayAlert("Error", "Missing address please enter a valid one", "OK");
+                return;
+            }
+
+            IEnumerable<Location> locations = await Geocoding.Default.GetLocationsAsync(Property.Address);
+
+            Location location = locations?.FirstOrDefault();
+
+            if (location is null)
+            {
+                await Shell.Current.DisplayAlert("Error", "No valid address was found. Please check your input and try again", "OK");
+            }
+
+            if (location != null)
+            {
+                Property.Latitude = location.Latitude;
+                Property.Longitude = location.Longitude;
+                OnPropertyChanged(nameof(Property));
+            }
+
+        }
+        catch (Exception)
+        {
+            await Shell.Current.DisplayAlert("Error", "Failed to fetch address. Please double check input", "OK");
+        }
+        finally
+        {
+            _isCheckingLocation = false;
+            StatusMessage = string.Empty;
         }
     }
 }
