@@ -25,6 +25,8 @@ public class PropertyListPageViewModel : BaseViewModel
         set => SetProperty(ref isRefreshing, value);
     }
 
+
+
     Location _lastKnownLocation;
 
     private Command getPropertiesCommand;
@@ -129,5 +131,7 @@ public class PropertyListPageViewModel : BaseViewModel
         }
     }
     #endregion
+
+
 
 }
