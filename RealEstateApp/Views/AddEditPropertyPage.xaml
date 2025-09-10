@@ -191,7 +191,7 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <HorizontalStackLayout>
+                    <Grid ColumnDefinitions="3*,*" RowDefinitions="*">
                         <Entry
                             TextColor="Black"
                             Text="{Binding Property.Aspect}" />
@@ -200,8 +200,9 @@
                             FontFamily="FA-solid"
                             VerticalOptions="Center"
                             TextColor="Purple"
-                            Command="{Binding GoToCompassCommand}" />
-                    </HorizontalStackLayout>
+                            Command="{Binding GoToCompassCommand}"
+                            Grid.Column="1"/>
+                    </Grid>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
