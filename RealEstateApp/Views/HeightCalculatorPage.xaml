@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RealEstateApp.Views.HeightCalculatorPage"
+             xmlns:vm="clr-namespace:RealEstateApp.ViewModels"
+             xmlns:models="clr-namespace:RealEstateApp.Models"
+             x:DataType="vm:HeightCalculatorPageViewModel"
+             Title="HeightCalculatorPage">
+    <VerticalStackLayout Spacing="25">
+        <Label 
+            Text="{Binding CurrentAltitude, StringFormat='Altitude: {0:n2} m'}" 
+            HorizontalOptions="Center" />
+        <Entry Text="{Binding MeasurementLabel}">
+            
+        </Entry>
+        <Button Command="{Binding SaveMeasurementCommand}">
+            
+        </Button>
+        <CollectionView
+            ItemsSource="{Binding Measurements}"
+            SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:BarometerMeasurement">
+                    <HorizontalStackLayout>
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            Text="{Binding Display}" />
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="14"
+                            TextColor="Grey"
+                            Text="{Binding HeightChange, StringFormat='  ({0:n2}m)'}" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        <Label 
+            Text="{Binding CurrentPressure, StringFormat='Air pressure: {0:n1} hPa'}" 
+            HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>
