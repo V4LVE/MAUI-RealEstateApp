@@ -1,5 +1,6 @@
 ﻿using RealEstateApp.Models;
 using RealEstateApp.Services;
+using RealEstateApp.Views.Modals;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -89,6 +90,16 @@ public class AddEditPropertyPageViewModel : BaseViewModel
     }
     #endregion
 
+    private Command goToCompassCommand;
+    public ICommand GoToCompassCommand => goToCompassCommand ??= new Command(async () => await GoToCompass());
+    async Task GoToCompass()
+    {
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+        await Shell.Current.GoToAsync($"{nameof(CompassPage)}", true, new Dictionary<string, object>
+        {
+            {"MyProperty", Property }
+        });
+    }
 
     private Command savePropertyCommand;
     public ICommand SavePropertyCommand => savePropertyCommand ??= new Command(async () => await SaveProperty());

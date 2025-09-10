@@ -3,6 +3,7 @@ using RealEstateApp.Repositories;
 using RealEstateApp.Services;
 using RealEstateApp.ViewModels;
 using RealEstateApp.Views;
+using RealEstateApp.Views.Modals;
 
 namespace RealEstateApp;
 
@@ -26,6 +27,9 @@ public static class MauiProgram
 
         builder.Services.AddTransient<PropertyDetailPage>();
         builder.Services.AddTransient<PropertyDetailPageViewModel>();
+
+        builder.Services.AddTransient<CompassPage>();
+        builder.Services.AddTransient<CompassViewModel>();
 
         builder.Services.AddTransient<AddEditPropertyPage>();
         builder.Services.AddTransient<AddEditPropertyPageViewModel>();

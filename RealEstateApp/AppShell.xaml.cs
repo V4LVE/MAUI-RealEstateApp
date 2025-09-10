@@ -1,14 +1,16 @@
 ﻿using RealEstateApp.Views;
+using RealEstateApp.Views.Modals;
 
 namespace RealEstateApp;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
-	{
-		InitializeComponent();
+    public AppShell()
+    {
+        InitializeComponent();
 
-		Routing.RegisterRoute(nameof(PropertyDetailPage), typeof(PropertyDetailPage));
+        Routing.RegisterRoute(nameof(PropertyDetailPage), typeof(PropertyDetailPage));
         Routing.RegisterRoute(nameof(AddEditPropertyPage), typeof(AddEditPropertyPage));
+        Routing.RegisterRoute(nameof(CompassPage), typeof(CompassPage));
     }
 }

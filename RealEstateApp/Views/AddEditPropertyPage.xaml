@@ -182,6 +182,26 @@
                         ItemDisplayBinding="{Binding Name}"
                         ItemsSource="{Binding Agents}"
                         SelectedItem="{Binding SelectedAgent}" />
+                    <Label FontSize="Medium" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span FontFamily="FA-solid" Text="{Static fa:IconFont.CompactDisc}" />
+                                <Span Text=" " />
+                                <Span Text="Aspect" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <HorizontalStackLayout>
+                        <Entry
+                            TextColor="Black"
+                            Text="{Binding Property.Aspect}" />
+                        <Button
+                            Text="{x:Static fa:IconFont.DraftingCompass}"
+                            FontFamily="FA-solid"
+                            VerticalOptions="Center"
+                            TextColor="Purple"
+                            Command="{Binding GoToCompassCommand}" />
+                    </HorizontalStackLayout>
                 </StackLayout>
             </ScrollView>
         </StackLayout>
