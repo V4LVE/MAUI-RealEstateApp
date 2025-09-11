@@ -38,4 +38,10 @@
 			<data android:scheme="smsto"/>
 		</intent>
 	</queries>
+	<queries>
+		<intent>
+			<action android:name="android.intent.action.VIEW" />
+			<data android:scheme="geo"/>
+		</intent>
+	</queries>
 </manifest>
