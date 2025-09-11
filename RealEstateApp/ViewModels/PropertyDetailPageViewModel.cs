@@ -97,4 +97,58 @@ public class PropertyDetailPageViewModel : BaseViewModel
         _ttsCts?.Cancel();
         _isReading = false;
     }
+
+    private Command openMailCommand;
+    public ICommand OpenMailCommand => openMailCommand ??= new Command<string>(async (email) => await OpenMail(email));
+
+    async Task OpenMail(string email)
+    {
+        if (Email.Default.IsComposeSupported)
+        {
+
+            string subject = "Mail to Vendor!";
+            string body = "It was great to see you last weekend.";
+            string[] recipients = new[] { email };
+
+            var message = new EmailMessage
+            {
+                Subject = subject,
+                Body = body,
+                BodyFormat = EmailBodyFormat.PlainText,
+                To = new List<string>(recipients)
+            };
+
+            await Email.Default.ComposeAsync(message);
+        }
+    }
+
+    private Command phoneDialogCommand;
+    public ICommand PhoneDialogCommand => phoneDialogCommand ??= new Command<string>(async (phonenumber) => await OpenPhoneDialog(phonenumber));
+
+    async Task OpenPhoneDialog(string phonenumber)
+    {
+        string action = await Shell.Current.DisplayActionSheet(phonenumber, "Cancel", null, "Call", "SMS");
+
+        switch (action)
+        {
+            case "Call":
+                if (PhoneDialer.Default.IsSupported)
+                    PhoneDialer.Default.Open(phonenumber);
+                break;
+            case "SMS":
+                if (Sms.Default.IsComposeSupported)
+                {
+                    string[] recipients = new[] { phonenumber };
+                    string text = "Hello, I'm interested in buying your propery";
+
+                    var message = new SmsMessage(text, recipients);
+
+                    await Sms.Default.ComposeAsync(message);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
 }

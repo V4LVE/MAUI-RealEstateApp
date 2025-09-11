@@ -47,7 +47,15 @@ namespace RealEstateApp.Repositories
                         "This lovely house has 180 degree ocean views and features state of the art appliances.",
                     Beds = 3, Baths = 1, Parking = 1, LandSize = 500, Price = 600000, AgentId = "agent_2",
                     ImageUrls = GetPropertyImageUrls(1),
-                    Latitude = 55.029293, Longitude = 9.412116
+                    Latitude = 55.029293, Longitude = 9.412116,
+                    Vendor = new Vendor
+                    {
+                        FirstName = "William",
+                        LastName = "Grant",
+                        Email = "wgrant@pluralsight.com",
+                        Phone = "+61423555712"
+                    },
+                    NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Collaroy,_New_South_Wales",
                 },
                 new Property
                 {
@@ -56,7 +64,15 @@ namespace RealEstateApp.Repositories
                         "Situated in a prime location close to shops, this property represents excellent value for money.",
                     Beds = 4, Baths = 2, Parking = 3, LandSize = 620, Price = 750000, AgentId = "agent_2",
                     ImageUrls = GetPropertyImageUrls(2),
-                    Latitude =  55.033061, Longitude = 9.381995
+                    Latitude =  55.033061, Longitude = 9.381995,
+                    Vendor = new Vendor
+                    {
+                        FirstName = "Ashleigh",
+                        LastName = "Cooper",
+                        Email = "acooper@pluralsight.com",
+                        Phone = "+61290014312"
+                    },
+                    NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Collaroy,_New_South_Wales"
                 },
                 new Property
                 {
@@ -64,7 +80,16 @@ namespace RealEstateApp.Repositories
                     Description = "This near new architecturally designed house is a unique offering in the area.",
                     Beds = 2, Baths = 2, Parking = 1, LandSize = 300, Price = 825000, AgentId = "agent_2",
                     ImageUrls = GetPropertyImageUrls(3),
-                    Latitude = 54.983379, Longitude = 9.373165
+                    Latitude = 54.983379, Longitude = 9.373165,
+                    Vendor = new Vendor
+                    {
+                        FirstName = "Matthew",
+                        LastName = "Pickering",
+                        Email = "mpickering@pluralsight.com",
+                        Phone = "0429008145"
+                    },
+                    NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Collaroy,_New_South_Wales",
+
                 },
                 new Property
                 {
@@ -73,7 +98,15 @@ namespace RealEstateApp.Repositories
                         "Located in one of the most sought after streets in the area, this charming house has a lot going for it.",
                     Beds = 3, Baths = 1, Parking = 3, LandSize = 450, Price = 480000, AgentId = "agent_1",
                     ImageUrls = GetPropertyImageUrls(4),
-                    Latitude = 54.989000, Longitude = 9.285592
+                    Latitude = 54.989000, Longitude = 9.285592,
+                    Vendor = new Vendor
+                    {
+                        FirstName = "Sam",
+                        LastName = "Byron",
+                        Email = "sbyron@pluralsight.com",
+                        Phone = "02 8090 6412"
+                    },
+                    NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Collaroy,_New_South_Wales"
                 },
                 new Property
                 {
@@ -81,7 +114,15 @@ namespace RealEstateApp.Repositories
                     Description = "Newly renovated house in great location close to the beach.",
                     Beds = 1, Baths = 1, Parking = 1, LandSize = 370, Price = 610000, AgentId = "agent_1",
                     ImageUrls = GetPropertyImageUrls(5),
-                    Latitude = 56.463438, Longitude = 9.385407
+                    Latitude = 56.463438, Longitude = 9.385407,
+                    Vendor = new Vendor
+                    {
+                        FirstName = "Jenny",
+                        LastName = "Oaks",
+                        Email = "joaks@pluralsight.com",
+                        Phone = "90541823"
+                    },
+                    NeighbourhoodUrl = "https://en.wikipedia.org/wiki/Collaroy,_New_South_Wales"
                 }
             };
         }

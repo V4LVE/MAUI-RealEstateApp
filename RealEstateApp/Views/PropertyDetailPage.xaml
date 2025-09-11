@@ -16,7 +16,7 @@
     <ScrollView>
         <Grid
             Padding="15"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
             RowSpacing="10">
             <Image
                 Grid.Row="0"
@@ -105,8 +105,59 @@
                 Margin="0,0,0,20"
                 FontSize="14"
                 Text="{Binding Property.Description}" />
+            <VerticalStackLayout Grid.Row="7">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="14"
+                    Text="Vendor:" />
+                <HorizontalStackLayout Spacing="10">
+                    <Label
+                        FontAttributes="Bold"
+                        FontFamily="FA-solid"
+                        VerticalOptions="Center"
+                        Text="{Static fa:IconFont.User}" />
+                    <Label
+                        FontAttributes="Bold"
+                        Text="{Binding Property.Vendor.FullName}"
+                        VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+                <Border>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyDetailPageViewModel}}, Path=OpenMailCommand}" CommandParameter="{Binding Property.Vendor.Email}" />
+                    </Border.GestureRecognizers>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="FA-solid"
+                            VerticalOptions="Center"
+                            Text="{Static fa:IconFont.Envelope}" />
+                        <Label
+                            FontAttributes="Bold"
+                            Text="{Binding Property.Vendor.Email}"
+                            VerticalOptions="Center"
+                            TextColor="Blue"/>
+                    </HorizontalStackLayout>
+                </Border>
+                <Border>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PropertyDetailPageViewModel}}, Path=PhoneDialogCommand}" CommandParameter="{Binding Property.Vendor.Phone}" />
+                    </Border.GestureRecognizers>
+                    <HorizontalStackLayout Spacing="10">
+                        <Label
+                            FontAttributes="Bold"
+                            FontFamily="FA-solid"
+                            VerticalOptions="Center"
+                            Text="{Static fa:IconFont.Phone}" />
+                        <Label
+                            FontAttributes="Bold"
+                            Text="{Binding Property.Vendor.Phone}"
+                            VerticalOptions="Center"
+                            TextColor="Blue"/>
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
             <Label
-                Grid.Row="7"
+                Grid.Row="8"
                 FontAttributes="Bold"
                 FontSize="14"
                 Text="Listed by:" />
