@@ -30,11 +30,18 @@
                 FontSize="16"
                 LineBreakMode="NoWrap"
                 Text="{Binding Property.Price, StringFormat='{0:C0}'}" />
-            <Label
-                Grid.Row="2"
-                FontSize="16"
-                LineBreakMode="NoWrap"
-                Text="{Binding Property.Address}" />
+            <HorizontalStackLayout Grid.Row="2" Spacing="5">
+                <Label
+                    FontSize="16"
+                    LineBreakMode="NoWrap"
+                    VerticalOptions="Center"
+                    Text="{Binding Property.Address}" />
+                <Button Text="{Static fa:IconFont.MapPin}" FontFamily="FA-solid" Command="{Binding OpenMapCommand}" VerticalOptions="Center">
+                </Button>
+                <Button Text="{Static fa:IconFont.Directions}" FontFamily="FA-solid" Command="{Binding OpenMapGuideCommand}" VerticalOptions="Center">
+                </Button>
+            </HorizontalStackLayout>
+            
             <Grid
                 Grid.Row="3"
                 ColumnDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"

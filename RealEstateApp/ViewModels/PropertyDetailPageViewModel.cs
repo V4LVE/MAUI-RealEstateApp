@@ -151,4 +151,44 @@ public class PropertyDetailPageViewModel : BaseViewModel
         }
     }
 
+    private Command openMapCommand;
+    public ICommand OpenMapCommand => openMapCommand ??= new Command(async () => await OpenMap());
+
+    async Task OpenMap()
+    {
+        var location = new Location((double)Property.Latitude, (double)Property.Longitude);
+        var options = new MapLaunchOptions { Name = Property.Address };
+
+        try
+        {
+            await Map.Default.OpenAsync(location, options);
+        }
+        catch (Exception ex)
+        {
+            // No map application available to open
+        }
+    }
+
+    private Command openMapGuideCommand;
+    public ICommand OpenMapGuideCommand => openMapGuideCommand ??= new Command(async () => await OpenMapGuide());
+
+    async Task OpenMapGuide()
+    {
+        var location = new Location((double)Property.Latitude, (double)Property.Longitude);
+        var options = new MapLaunchOptions
+        {
+            Name = Property.Address,
+            NavigationMode = NavigationMode.Driving
+        };
+
+        try
+        {
+            await Map.Default.OpenAsync(location, options);
+        }
+        catch (Exception ex)
+        {
+            // No map application available to open
+        }
+    }
 }
+
