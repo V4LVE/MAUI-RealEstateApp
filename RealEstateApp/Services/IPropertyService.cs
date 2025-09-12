@@ -7,5 +7,6 @@ namespace RealEstateApp.Services
         List<Agent> GetAgents();
         List<Property> GetProperties();
         void SaveProperty(Property property);
+        LoginResult LoginAsync(string username, string password);
     }
 }

@@ -84,6 +84,9 @@
 	  <MauiXaml Update="Views\HeightCalculatorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Modals\CompassPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

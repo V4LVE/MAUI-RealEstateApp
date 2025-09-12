@@ -1,5 +1,6 @@
 ﻿using RealEstateApp.Models;
 using RealEstateApp.Services;
+using System.Security.Cryptography;
 
 namespace RealEstateApp.Repositories
 {
@@ -158,6 +159,27 @@ namespace RealEstateApp.Repositories
                 $"{GlobalSettings.Instance.ImageBaseUrl}kitchen_{index}.jpg",
                 $"{GlobalSettings.Instance.ImageBaseUrl}bed_{index}.jpg"
             };
+        }
+
+        public LoginResult LoginAsync(string username, string password)
+        {
+            if (password == "admin" && username == "admin")
+            {
+                return new LoginResult
+                {
+                    Succeded = true,
+                    AccessToken = GenerateAccessToken(),
+                    RefreshToken = GenerateAccessToken()
+                };
+            }
+            return new LoginResult { Succeded = false };
+        }
+
+        private string GenerateAccessToken(int length = 32)
+        {
+            var bytes = new byte[length];
+            RandomNumberGenerator.Fill(bytes);
+            return Convert.ToBase64String(bytes);
         }
     }
 }
