@@ -72,8 +72,8 @@ public class PropertyDetailPageViewModel : BaseViewModel
             IEnumerable<Locale> locales = await TextToSpeech.Default.GetLocalesAsync();
             var settings = new SpeechOptions()
             {
-                Volume = 1.0f,
-                Pitch = 1.0f,
+                Volume = (float)Preferences.Default.Get("volume", 1.0),
+                Pitch = (float)Preferences.Default.Get("pitch", 1.0),
                 Locale = locales.FirstOrDefault()
             };
             await TextToSpeech.Default.SpeakAsync(Property.Description, settings, _ttsCts.Token);

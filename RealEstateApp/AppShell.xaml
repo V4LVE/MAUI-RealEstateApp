@@ -21,4 +21,9 @@
     ContentTemplate="{DataTemplate views:HeightCalculatorPage}"
     Route="heightcalc" />
 
+    <ShellContent
+         Title="Settings Page"
+         ContentTemplate="{DataTemplate views:SettingsPage}"
+         Route="settingspage" />
+
 </Shell>
