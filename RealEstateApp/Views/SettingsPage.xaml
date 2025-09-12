@@ -17,6 +17,6 @@
             Minimum="0.1" 
             Maximum="2"
             Value="{Binding Pitch}"/>
-        <Button Text="Reset Settings" />
+        <Button Text="Reset Settings" Command="{Binding ResetSettingsCommand}" />
     </VerticalStackLayout>
 </ContentPage>

@@ -1,4 +1,6 @@
-﻿namespace RealEstateApp.ViewModels
+﻿using System.Windows.Input;
+
+namespace RealEstateApp.ViewModels
 {
     public class SettingsPageViewModel : BaseViewModel
     {
@@ -23,5 +25,12 @@
             }
         }
         #endregion
+
+        private Command resetSettingsCommand;
+        public ICommand ResetSettingsCommand => resetSettingsCommand ??= new Command(() => ResetSettings());
+        void ResetSettings()
+        {
+            Preferences.Default.Clear();
+        }
     }
 }
